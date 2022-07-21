@@ -8,6 +8,7 @@ class HomeController extends ChangeNotifier {
 
   getAllRecipes() async {
     try {
+      errorMessage = null;
       recipesList = null;
       notifyListeners();
 

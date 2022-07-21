@@ -17,9 +17,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      homeController.getAllRecipes();
-    });
+    homeController.getAllRecipes();
   }
 
   @override
@@ -38,17 +36,20 @@ class _HomeViewState extends State<HomeView> {
       body: AnimatedBuilder(
         animation: homeController,
         builder: (context, _) {
-          if (homeController.recipesList == null) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
           if (homeController.errorMessage != null) {
             return Center(child: Text(homeController.errorMessage!));
+          }
+
+          if (homeController.recipesList == null) {
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (homeController.recipesList!.isEmpty) {
             return const Center(child: Text('No recipes yes :('));
           }
+
+          List<Recipe> list = homeController.recipesList!;
+          list.sort(((a, b) => b.name.compareTo(a.name)));
 
           return ListView.builder(
             itemCount: homeController.recipesList!.length,
