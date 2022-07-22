@@ -3,8 +3,10 @@ import 'package:loka_app/models/recipe.dart';
 import 'package:loka_app/services/recipe_service.dart';
 
 class HomeController extends ChangeNotifier {
-  List<Recipe>? recipesList;
   String? errorMessage;
+  List<Recipe>? recipesList;
+  List<Recipe>? get sortedRecipesList =>
+      recipesList?..sort(((a, b) => b.name.compareTo(a.name)));
 
   getAllRecipes() async {
     try {

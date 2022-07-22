@@ -40,21 +40,20 @@ class _HomeViewState extends State<HomeView> {
             return Center(child: Text(homeController.errorMessage!));
           }
 
-          if (homeController.recipesList == null) {
+          if (homeController.sortedRecipesList == null) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          if (homeController.recipesList!.isEmpty) {
+          List<Recipe> sortedRecipesList = homeController.sortedRecipesList!;
+
+          if (sortedRecipesList.isEmpty) {
             return const Center(child: Text('No recipes yes :('));
           }
 
-          List<Recipe> list = homeController.recipesList!;
-          list.sort(((a, b) => b.name.compareTo(a.name)));
-
           return ListView.builder(
-            itemCount: homeController.recipesList!.length,
+            itemCount: sortedRecipesList.length,
             itemBuilder: (context, index) {
-              Recipe recipe = homeController.recipesList![index];
+              Recipe recipe = sortedRecipesList[index];
 
               return InkWell(
                 onTap: () => Navigator.of(context).pushNamed(
