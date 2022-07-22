@@ -47,7 +47,7 @@ class _HomeViewState extends State<HomeView> {
           List<Recipe> sortedRecipesList = homeController.sortedRecipesList!;
 
           if (sortedRecipesList.isEmpty) {
-            return const Center(child: Text('No recipes yes :('));
+            return const Center(child: Text('No recipes yet :('));
           }
 
           return ListView.builder(
